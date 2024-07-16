@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.112.0"
+      version = "3.112.0"   #Updated the latest version from @https://registry.terraform.io/providers/hashicorp/azurerm/latest
     }
   }
 
@@ -16,5 +16,5 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {}  #Use feature block to enable basic funtionality
 }
