@@ -17,7 +17,7 @@ jobs:
             const owner = context.payload.repository.owner.login;
             const repo = context.payload.repository.name;
             const prNumber = context.payload.number;
-            const reviewer = 'tusharupase786';  // Replace with the GitHub username of the reviewer you want to add
+            const reviewer = 'tusharupase786';
             
             await github.pulls.createReviewRequest({
               owner: owner,
