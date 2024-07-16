@@ -83,7 +83,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 For any inquiries or feedback, please reach out to me at [tusharupase786@gmail.com](mailto:tusharupase786@gmail.com).
-
----
-
-Feel free to customize this README further if needed. Let me know if there are any additional details you'd like to include!
