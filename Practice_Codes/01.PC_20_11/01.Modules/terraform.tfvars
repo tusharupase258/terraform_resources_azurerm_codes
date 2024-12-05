@@ -192,44 +192,118 @@ tusharbastionhostsvarsM = {
   }
 }
 
-# tusharlbvarsM = {
-#   tusharlb1 = {
-#     name                           = "tusharlb1"
-#     resource_group_name            = "tusharRG1"
-#     location                       = "France Central"
-#     frontend_ip_configuration_name = "tusharlbfront_configname"
-#     public_ip_name                 = "tusharlbpublicip"
-#     backend_pool_name              = "tusharbackend_pool_lb1"
-#     backend_address_pool_id        = ""
-#     ip_address                     = ""
-#     loadbalancer_id                = ""
-#     public_ip_address_id           = ""
-#     nic_name                       = "tusharnic1"
-#     vnet_name                      = "tusharvnet1"
-#     virtual_network_id             = ""
-#   }
-# }
 
-# tusharlbvarsM = {
-#   tusharlb1 = {
-#     name                = "tusharlb1"
-#     resource_group_name = "tusharRG1"
-#     location            = "France Central"
-#   }
-# }
+tusharlbvarsM = {
+  tusharlb1 = {
+    name                 = "tusharlb1"
+    location             = "France Central"
+    resource_group_name  = "tusharRG1"
+    publicip_name        = "tusharlbpublicip"
+    public_ip_address_id = ""
+  }
+}
 
-# tusharlbfrontipconfigvarsM = {
-#   tusharfrontend_ipconfiglb1 = {
-#     name                 = "tusharfrontend_ipconfiglb1"
-#     public_ip_address_id = ""
-#     public_ip_name       = "tusharlbpublicip"
-#   }
-# }
+tusharlb_backendpool_varM = {
+  tusharlb_backendpool1 = {
+    name            = "tusharlb_backendpool1"
+    loadbalancer_id = ""
+    lb_name         = "tusharlb1"
+  }
+}
 
-# tushar_lb_backend_address_poolvarsM = {
-#   tusharbackend_pool_lb1 = {
-#     name            = "tusharbackend_pool_lb1"
-#     loadbalancer_id = ""
-#     lb_name         = "tusharlb1"
-#   }
-# }
+tusharlb_backendpool_addressvarsM = {
+  tusharbackend_address1 = {
+    name                    = "tusharbackend_address1"
+    backend_address_pool_id = ""
+    backendpool_name        = "tusharlb_backendpool1"
+    ip_address              = ""
+    virtual_network_id      = ""
+    vm_name                 = "tusharvm1"
+    virtual_network_name    = "tusharvnet1"
+  }
+  tusharbackend_address2 = {
+    name                    = "tusharbackend_address2"
+    backend_address_pool_id = ""
+    backendpool_name        = "tusharlb_backendpool1"
+    ip_address              = ""
+    virtual_network_id      = ""
+    vm_name                 = "tusharvm2"
+    virtual_network_name    = "tusharvnet1"
+  }
+}
+
+tusharlb_VMs_backendvarsM = {
+  tusharvm1 = {
+    name                = "tusharvm1"
+    resource_group_name = "tusharRG1"
+  }
+  tusharvm2 = {
+    name                = "tusharvm2"
+    resource_group_name = "tusharRG1"
+  }
+}
+
+tusharvnet_lbvarsM = {
+  tusharvnet1 = {
+    name                = "tusharvnet1"
+    resource_group_name = "tusharRG1"
+  }
+}
+
+tusharlb_healthprobevarsM = {
+  tushar_http-probe = {
+    name = "tushar_http-probe"
+    port = 80
+    lb_name = "tusharlb1"
+    protocol = "Http"
+    number_of_probes = 2
+    request_path = "/health"
+    interval_in_seconds = 10
+    loadbalancer_id = ""
+  }
+  tushar_tcp-probe = {
+    name = "tushar_tcp-probe"
+    port = 443
+    protocol = "Tcp"
+    lb_name = "tusharlb1"
+    number_of_probes = null
+    request_path = ""
+    interval_in_seconds = null
+    loadbalancer_id = ""
+  }
+}
+
+tusharlb_rulevarsM = {
+  rule1 = {
+    name                           = "tushar-rule-http"
+    protocol                       = "Tcp"
+    lb_name                        = "tusharlb1"
+    frontend_ip_configuration_name = "tusharlb1-frontend_ip_config"
+    frontend_port                  = 80
+    backend_port                   = 80
+    enable_tcp_reset               = true
+    idle_timeout_in_minutes        = 4
+    load_distribution               = "Default"
+    loadbalancer_id = ""
+    backend_address_pool_ids = []
+    probe_id = ""
+    probe_name = "tushar_tcp-probe"
+    backendpool_name = "tusharlb_backendpool1"
+  }
+  rule2 = {
+    name                           = "tushar-rule-https"
+    protocol                       = "Tcp"
+    lb_name                        = "tusharlb1"
+    frontend_ip_configuration_name = "tusharlb1-frontend_ip_config"
+    frontend_port                  = 443
+    backend_port                   = 443
+    enable_tcp_reset               = false
+    idle_timeout_in_minutes        = 4
+    load_distribution               = "Default"
+    loadbalancer_id = ""
+    backend_address_pool_ids = []
+    probe_id = ""
+    probe_name = "tushar_tcp-probe"
+    backendpool_name = "tusharlb_backendpool1"
+  }
+}
