@@ -14,7 +14,7 @@ resource "azurerm_key_vault_secret" "tusharsecret" {
     name = "${each.value.name}-secretpass"
     value = random_password.tusharpassgenerate[each.key].result
     key_vault_id = data.azurerm_key_vault.tusharkeyvaultdata[each.value.keyvault_name].id
-    # lifecycle {
-    #   prevent_destroy = true
-    # }
+    lifecycle {
+      prevent_destroy = true
+    }
 }

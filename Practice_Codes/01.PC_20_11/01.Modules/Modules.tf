@@ -75,3 +75,17 @@ module "azurerm_bastion_host_module" {
   source                 = "../13.Bastion_Code"
   tusharbastionhostsvars = var.tusharbastionhostsvarsM
 }
+
+
+module "azurerm_lb_module" {
+  depends_on                       = [module.azurerm_public_ip_module, module.azurerm_linux_virtual_machine_module]
+  source                           = "../14.Load_Balancer"
+  tusharlbvars                     = var.tusharlbvarsM
+  tusharpublicipvars               = var.tusharpublicipvarsM
+  tusharlb_backendpool_vars        = var.tusharlb_backendpool_varM
+  tusharlb_backendpool_addressvars = var.tusharlb_backendpool_addressvarsM
+  tusharlb_VMs_backendvars         = var.tusharlb_VMs_backendvarsM
+  tusharvnet_lbvars                = var.tusharvnet_lbvarsM
+  tusharlb_healthprobevars = var.tusharlb_healthprobevarsM
+  tusharlb_rulevars = var.tusharlb_rulevarsM
+}
