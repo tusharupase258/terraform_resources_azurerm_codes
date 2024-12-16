@@ -59,6 +59,24 @@ tusharsubnetsvarM = {
     virtual_network_name = "tusharvnet1"
     address_prefixes     = ["10.1.3.0/24"]
   }
+  tusharsubnet3 = {
+    name                 = "tusharsubnet3"
+    resource_group_name  = "tusharRG1"
+    virtual_network_name = "tusharvnet1"
+    address_prefixes     = ["10.1.4.0/24"]
+  }
+  tusharwindowvmsubnet1 = {
+    name                 = "tusharwindowvmsubnet1"
+    resource_group_name  = "tusharRG1"
+    virtual_network_name = "tusharvnet1"
+    address_prefixes     = ["10.1.5.0/24"]
+  }
+  tusharsubnetwindowsvmss = {
+    name                 = "tusharsubnetwindowsvmss"
+    resource_group_name  = "tusharRG1"
+    virtual_network_name = "tusharvnet1"
+    address_prefixes     = ["10.1.6.0/24"]
+  }
 }
 
 tusharkeyvaultsvarsM = {
@@ -81,7 +99,7 @@ tusharvmvarsM = {
     key_vault_id                    = ""
     resource_group_name             = "tusharRG1"
     location                        = "France Central"
-    size                            = "Standard_F2"
+    size                            = "Standard_F1"
     nic_name                        = "tusharnic1"
     admin_username                  = ""
     admin_password                  = ""
@@ -90,21 +108,21 @@ tusharvmvarsM = {
     keyvault_name                   = "tusharkeyvault2"
     nic_name                        = "tusharnic1"
   }
-  tusharvm2 = {
-    name                            = "tusharvm2"
-    value                           = ""
-    key_vault_id                    = ""
-    keyvault_name                   = "tusharkeyvault2"
-    resource_group_name             = "tusharRG1"
-    location                        = "France Central"
-    size                            = "Standard_F2"
-    nic_name                        = "tusharnic2"
-    admin_password                  = ""
-    admin_username                  = ""
-    disable_password_authentication = false
-    network_interface_ids           = []
-    nic_name                        = "tusharnic2"
-  }
+  # tusharvm2 = {
+  #   name                            = "tusharvm2"
+  #   value                           = ""
+  #   key_vault_id                    = ""
+  #   keyvault_name                   = "tusharkeyvault2"
+  #   resource_group_name             = "tusharRG1"
+  #   location                        = "France Central"
+  #   size                            = "Standard_F1"
+  #   nic_name                        = "tusharnic2"
+  #   admin_password                  = ""
+  #   admin_username                  = ""
+  #   disable_password_authentication = false
+  #   network_interface_ids           = []
+  #   nic_name                        = "tusharnic2"
+  # }
 }
 
 tusharnicvarsM = {
@@ -130,7 +148,36 @@ tusharnicvarsM = {
     subnet_id   = ""
     subnet_name = "tusharsubnet2"
     # public_ip_name                = "tusharpublicip2"
-    nsg_name = "tusharnsgallowssh22"
+    # nsg_name = "tusharnsgallowssh22"
+  }
+  tusharlinuxvmssnic = {
+    name                          = "tusharlinuxvmssnic"
+    location                      = "France Central"
+    resource_group_name           = "tusharRG1"
+    ip_configuration_name         = "tusharlinuxvmssip_config"
+    private_ip_address_allocation = ""
+    subnet_id                     = ""
+    subnet_name                   = "tusharsubnet3"
+    # nsg_name                      = "tusharnsgallowssh22"
+  }
+  tusharwindowsvmnic1 = {
+    name                          = "tusharwindowsvmnic1"
+    location                      = "France Central"
+    resource_group_name           = "tusharRG1"
+    ip_configuration_name         = "tusharwindowsvm1ipconfig"
+    private_ip_address_allocation = ""
+    subnet_id                     = ""
+    subnet_name                   = "tusharwindowvmsubnet1"
+    # nsg_name                      = "tusharnsgallowssh22"
+  }
+  tusharwinvmssnic1 = {
+    name                          = "tusharwinvmssnic1"
+    location                      = "France Central"
+    resource_group_name           = "tusharRG1"
+    ip_configuration_name         = "tusharwinvmss1ipconfig"
+    private_ip_address_allocation = ""
+    subnet_id                     = ""
+    subnet_name                   = "tusharsubnetwindowsvmss"
   }
 }
 
@@ -221,15 +268,15 @@ tusharlb_backendpool_addressvarsM = {
     vm_name                 = "tusharvm1"
     virtual_network_name    = "tusharvnet1"
   }
-  tusharbackend_address2 = {
-    name                    = "tusharbackend_address2"
-    backend_address_pool_id = ""
-    backendpool_name        = "tusharlb_backendpool1"
-    ip_address              = ""
-    virtual_network_id      = ""
-    vm_name                 = "tusharvm2"
-    virtual_network_name    = "tusharvnet1"
-  }
+  # tusharbackend_address2 = {
+  #   name                    = "tusharbackend_address2"
+  #   backend_address_pool_id = ""
+  #   backendpool_name        = "tusharlb_backendpool1"
+  #   ip_address              = ""
+  #   virtual_network_id      = ""
+  #   vm_name                 = "tusharvm2"
+  #   virtual_network_name    = "tusharvnet1"
+  # }
 }
 
 tusharlb_VMs_backendvarsM = {
@@ -237,10 +284,10 @@ tusharlb_VMs_backendvarsM = {
     name                = "tusharvm1"
     resource_group_name = "tusharRG1"
   }
-  tusharvm2 = {
-    name                = "tusharvm2"
-    resource_group_name = "tusharRG1"
-  }
+  # tusharvm2 = {
+  #   name                = "tusharvm2"
+  #   resource_group_name = "tusharRG1"
+  # }
 }
 
 tusharvnet_lbvarsM = {
@@ -252,24 +299,24 @@ tusharvnet_lbvarsM = {
 
 tusharlb_healthprobevarsM = {
   tushar_http-probe = {
-    name = "tushar_http-probe"
-    port = 80
-    lb_name = "tusharlb1"
-    protocol = "Http"
-    number_of_probes = 2
-    request_path = "/health"
+    name                = "tushar_http-probe"
+    port                = 80
+    lb_name             = "tusharlb1"
+    protocol            = "Http"
+    number_of_probes    = 2
+    request_path        = "/health"
     interval_in_seconds = 10
-    loadbalancer_id = ""
+    loadbalancer_id     = ""
   }
   tushar_tcp-probe = {
-    name = "tushar_tcp-probe"
-    port = 443
-    protocol = "Tcp"
-    lb_name = "tusharlb1"
-    number_of_probes = null
-    request_path = ""
+    name                = "tushar_tcp-probe"
+    port                = 443
+    protocol            = "Tcp"
+    lb_name             = "tusharlb1"
+    number_of_probes    = null
+    request_path        = ""
     interval_in_seconds = null
-    loadbalancer_id = ""
+    loadbalancer_id     = ""
   }
 }
 
@@ -283,12 +330,12 @@ tusharlb_rulevarsM = {
     backend_port                   = 80
     enable_tcp_reset               = true
     idle_timeout_in_minutes        = 4
-    load_distribution               = "Default"
-    loadbalancer_id = ""
-    backend_address_pool_ids = []
-    probe_id = ""
-    probe_name = "tushar_tcp-probe"
-    backendpool_name = "tusharlb_backendpool1"
+    load_distribution              = "Default"
+    loadbalancer_id                = ""
+    backend_address_pool_ids       = []
+    probe_id                       = ""
+    probe_name                     = "tushar_tcp-probe"
+    backendpool_name               = "tusharlb_backendpool1"
   }
   rule2 = {
     name                           = "tushar-rule-https"
@@ -299,11 +346,60 @@ tusharlb_rulevarsM = {
     backend_port                   = 443
     enable_tcp_reset               = false
     idle_timeout_in_minutes        = 4
-    load_distribution               = "Default"
-    loadbalancer_id = ""
-    backend_address_pool_ids = []
-    probe_id = ""
-    probe_name = "tushar_tcp-probe"
-    backendpool_name = "tusharlb_backendpool1"
+    load_distribution              = "Default"
+    loadbalancer_id                = ""
+    backend_address_pool_ids       = []
+    probe_id                       = ""
+    probe_name                     = "tushar_tcp-probe"
+    backendpool_name               = "tusharlb_backendpool1"
+  }
+}
+
+
+tusharlinuxvmssvarsM = {
+  tusharlinuxvmss1 = {
+    name                            = "tusharlinuxvmss1"
+    resource_group_name             = "tusharRG1"
+    location                        = "France Central"
+    admin_username                  = ""
+    admin_password                  = "tusharlinuxvmss1pass@21"
+    disable_password_authentication = false
+    sku                             = "Standard_F1"
+    instances                       = 1
+    nic_name                        = "tusharlinuxvmssnic"
+    ip_configuration_name           = "tusharlinuxvmssip_config"
+    primary                         = true
+    subnet_id                       = ""
+    subnet_name                     = "tusharsubnet3"
+  }
+}
+
+tusharwindowsvmvarM = {
+  tusharwindowvm1 = {
+    name                  = "tusharwindowvm1"
+    resource_group_name   = "tusharRG1"
+    location              = "France Central"
+    size                  = "Standard_F1"
+    admin_username        = ""
+    admin_password        = "tusharwindowvm1@21pass"
+    network_interface_ids = []
+    nic_name              = "tusharwindowsvmnic1"
+  }
+}
+
+tusharwindowsvmssvarsM = {
+  twinvmss1 = {
+    name                  = "twinvmss1"
+    resource_group_name   = "tusharRG1"
+    location              = "France Central"
+    sku                   = "Standard_F1"
+    instances             = 1
+    admin_username        = ""
+    admin_password        = "tusharwinvmss1@21"
+    nic_name              = "tusharwinvmssnic1"
+    subnet_id             = ""
+    subnet_name           = "tusharsubnetwindowsvmss"
+    ip_configuration_name = "tusharwinvmss1ip_config"
+    primary               = true
   }
 }

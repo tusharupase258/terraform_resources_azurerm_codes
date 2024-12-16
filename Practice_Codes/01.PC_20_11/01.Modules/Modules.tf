@@ -86,6 +86,29 @@ module "azurerm_lb_module" {
   tusharlb_backendpool_addressvars = var.tusharlb_backendpool_addressvarsM
   tusharlb_VMs_backendvars         = var.tusharlb_VMs_backendvarsM
   tusharvnet_lbvars                = var.tusharvnet_lbvarsM
-  tusharlb_healthprobevars = var.tusharlb_healthprobevarsM
-  tusharlb_rulevars = var.tusharlb_rulevarsM
+  tusharlb_healthprobevars         = var.tusharlb_healthprobevarsM
+  tusharlb_rulevars                = var.tusharlb_rulevarsM
+}
+
+
+module "azurerm_linux_virtual_machine_scale_set_module" {
+  depends_on          = [module.azurerm_subnet_module]
+  source              = "../15.Linux_VMSS"
+  tusharlinuxvmssvars = var.tusharlinuxvmssvarsM
+  tusharsubnetvars    = var.tusharsubnetsvarM
+}
+
+module "azurerm_windows_virtual_machine_module" {
+  depends_on          = [module.azurerm_subnet_module, module.azurerm_network_interface_module]
+  source              = "../16.Windows_VM"
+  tusharwindowsvmvars = var.tusharwindowsvmvarM
+  tusharnicvars       = var.tusharnicvarsM
+}
+
+
+module "azurerm_windows_virtual_machine_scale_set_module" {
+  depends_on            = [module.azurerm_subnet_module]
+  source                = "../17.Windows_VMSS"
+  tusharsubnetvars      = var.tusharsubnetsvarM
+  tusharwindowsvmssvars = var.tusharwindowsvmssvarsM
 }

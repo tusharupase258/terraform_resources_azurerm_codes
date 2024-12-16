@@ -81,7 +81,7 @@ variable "tusharnicvarsM" {
     # public_ip_address_id          = optional(string)
     subnet_name = string
     # public_ip_name                = optional(string)
-    # nsg_name = string
+    # nsg_name = optional(string)
   }))
 }
 
@@ -174,33 +174,82 @@ variable "tusharvnet_lbvarsM" {
 
 variable "tusharlb_healthprobevarsM" {
   type = map(object({
-    name = string
-    port = number
-    protocol = string
-    loadbalancer_id = string
-    number_of_probes = optional(number)
-    request_path = optional(string)
+    name                = string
+    port                = number
+    protocol            = string
+    loadbalancer_id     = string
+    number_of_probes    = optional(number)
+    request_path        = optional(string)
     interval_in_seconds = optional(number)
-    lb_name = string
+    lb_name             = string
   }))
 }
 
 variable "tusharlb_rulevarsM" {
   type = map(object({
+    name                           = string
+    frontend_ip_configuration_name = string
+    backend_port                   = number
+    frontend_port                  = number
+    protocol                       = string
+    probe_id                       = string
+    enable_tcp_reset               = optional(bool, false)
+    enable_floating_ip             = optional(bool, false)
+    load_distribution              = optional(string, "Default")
+    idle_timeout_in_minutes        = optional(number, 4)
+    backend_address_pool_ids       = list(string)
+    lb_name                        = string
+    loadbalancer_id                = string
+    probe_name                     = string
+    backendpool_name               = string
+  }))
+}
+
+
+variable "tusharlinuxvmssvarsM" {
+  type = map(object({
     name                            = string
-    frontend_ip_configuration_name  = string
-    backend_port                    = number
-    frontend_port                   = number
-    protocol                        = string
-    probe_id                        = string
-    enable_tcp_reset                = optional(bool, false)
-    enable_floating_ip              = optional(bool, false)
-    load_distribution                = optional(string, "Default")
-    idle_timeout_in_minutes         = optional(number, 4)
-    backend_address_pool_ids        = list(string)
-    lb_name = string
-    loadbalancer_id = string
-    probe_name = string
-    backendpool_name = string
+    resource_group_name             = string
+    location                        = string
+    admin_password                  = string
+    admin_username                  = string
+    disable_password_authentication = bool
+    sku                             = string
+    nic_name                        = string
+    primary                         = bool
+    ip_configuration_name           = string
+    subnet_id                       = string
+    instances                       = number
+    subnet_name                     = string
+  }))
+}
+
+variable "tusharwindowsvmvarM" {
+  type = map(object({
+    name                  = string
+    resource_group_name   = string
+    location              = string
+    size                  = string
+    admin_password        = string
+    admin_username        = string
+    network_interface_ids = list(string)
+    nic_name              = string
+  }))
+}
+
+variable "tusharwindowsvmssvarsM" {
+  type = map(object({
+    name                  = string
+    resource_group_name   = string
+    location              = string
+    sku                   = string
+    instances             = number
+    admin_username        = string
+    admin_password        = string
+    nic_name              = string
+    primary               = bool
+    ip_configuration_name = string
+    subnet_id             = string
+    subnet_name           = string
   }))
 }

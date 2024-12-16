@@ -17,7 +17,7 @@ variable "tusharnicvars" {
     subnet_name = string
     ip_configuration_name = string
     #public_ip_name = optional(string)
-    # nsg_name = string
+    # nsg_name = optional(string)
   }) )
 }
 
