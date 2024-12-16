@@ -9,13 +9,13 @@ resource "azurerm_key_vault" "tusharkeyvaults" {
     tenant_id = data.azurerm_client_config.tusharclientconfig_data.tenant_id
     object_id = data.azurerm_client_config.tusharclientconfig_data.object_id
     key_permissions = [
-        "Get",
+       "Backup", "Create", "Decrypt", "Delete", "Encrypt", "Get", "Import", "List", "Purge", "Recover", "Restore", "Sign", "UnwrapKey", "Update", "Verify", "WrapKey"
     ]
     secret_permissions = [
-      "Get", "Backup", "Delete", "List", "Purge", "Recover", "Restore", "Set"
+      "Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"
     ]
     storage_permissions = [
-      "Get",
+      "Backup", "Delete", "DeleteSAS", "Get", "List", "ListSAS", "Purge", "Recover", "RegenerateKey", "Restore", "Set", "SetSAS", "Update"
     ]
   }
 }
